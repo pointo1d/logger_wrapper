@@ -1,0 +1,34 @@
+# Ruby files
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+# rspec failure tracking
+.rspec
+.rspec_status
+.rake_tasks*
+
+# (g)Vim sesssion files
+*.sw?
+
+# Log file
+*.log
+log
+
+# Backup files
+log
+*.bak
+*.log
+*.sav
+
+# Temp files
+fred
+t.*
+t
+
+#### END OF FILE
