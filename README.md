@@ -58,11 +58,12 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 ## To Do
+* Rename to something better e.g. Logger::Extended or similar.
 * Add extensible threshold level definition capability.
 * Provision of shorthand logging method access i.e. without the need for an associated logger instance (reduce typing).
-* Rework core extrension format from monkey patch to refined
-* Use ```log4j```/```Log4Perl``` style configuration files with modifications...
-  * As per Log4Perl, the ```::``` category separator is enabled (in addition to the 'normal' Java ```.``` separator).
+* Rework core extension format from monkey patch to _refined_/_using_.
+* Introduce ```log4j```/```Log4Perl``` style configuration files with modifications...
+  * Introduce the ```::``` category separator as per Log4Perl - in addition to the 'normal' Java ```.``` separator.
   * The addition of default and associated env var override definitions.
   * Reducing typing by allowing nested definitions such that the following would be considered equivalent (they are actually normalised to the aforementioned separate line format)...
   ```
@@ -76,7 +77,7 @@ The gem is available as open source under the terms of the [MIT License](https:/
       C:
         D: 1.2.3
         E: val
-* Configurable self/internal logging - including the enabling and threshold level setting of internal start-up logging.
-* Reworking of method names to more Ruby orientated e.g. ```threshold``` => ```set_threshold``` => ```threshold=```
+* Configurable self/internal logging - including the enabling and threshold level setting of internal logging at start-and beyond.
+* Reworking of method names to more Ruby orientated e.g. ```threshold``` => ```set_threshold``` => ```threshold=``` - start by adding method aliases.
 * Using the default logger determined by the class hierarchy of the calling class.
-
+* Define and introduce logging method caller string substitution keywords - for method, package &/or fully-qualified -  updating the default format to use them.
