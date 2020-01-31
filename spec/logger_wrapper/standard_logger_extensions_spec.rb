@@ -1,5 +1,9 @@
 
 RSpec.describe 'Logger extension' do
+  before(:each) do
+    @logger = Logger.new('/dev/null')
+  end
+
   it 'compiles/requires OK' do
     expect {
       require 'extensions/standard/logger'
@@ -9,15 +13,9 @@ RSpec.describe 'Logger extension' do
 
   require 'extensions/standard/logger'
 
-  context 'API is extended i.e. as was + extensions' do
-    describe 'log generation associated methods' do
-      %w(
-        trace debug entry exit info warn error fatal unknown
-      ).each do |m|
-        before(:each) do
-          @logger = Logger.new('/dev/null')
-        end
-
+  context 'responds to extensions' do
+    describe 'log generation' do
+      %w(trace entry exit).each do |m|
         ['', '?', '!'].each do |p|
           _m = "#{m}#{p}"
 
@@ -36,14 +34,8 @@ RSpec.describe 'Logger extension' do
       end
     end
 
-    describe 'logging control methods' do
-      [
-        :on, :off
-      ].each do |m|
-        before(:each) do
-          @logger = Logger.new('/dev/null')
-        end
-
+    describe 'control' do
+      [ :on, :off, :levels ].each do |m|
         it "responds to ##{m}" do
           expect(@logger).to respond_to(m)
         end
