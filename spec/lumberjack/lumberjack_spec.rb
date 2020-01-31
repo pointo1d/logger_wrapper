@@ -1,5 +1,5 @@
 require 'rspec'
-require 'logger_wrapper'
+require 'lumberjack'
 
 METHODS = {
   'core'  => {
@@ -21,9 +21,9 @@ GEN_METHODS = [*(METHODS['core']['gen']), *(METHODS['extra']['gen'])]
 NON_GEN_METHODS =
   [*(METHODS['core']['non_gen']), *(METHODS['extra']['non_gen'])]
 
-describe LoggerWrapper do
-  let(:loggen) { LoggerWrapper.new(STDOUT); }
-  let(:nonlog) { LoggerWrapper.new('/dev/null'); }
+describe Lumberjack do
+  let(:loggen) { Lumberjack.new(STDOUT); }
+  let(:nonlog) { Lumberjack.new('/dev/null'); }
 
   it 'creates distinct/unique instance' do
     expect(loggen).not_to eq nonlog
@@ -35,7 +35,7 @@ describe LoggerWrapper do
         it "#{type.capitalize} capability - #{method}()" do
           method =~ /(::|#)(.*)/
           method = $2
-          respondant = $1 == '::' ? LoggerWrapper : nonlog
+          respondant = $1 == '::' ? Lumberjack : nonlog
 
           expect(respondant).to respond_to(method)
         end
@@ -70,9 +70,9 @@ describe LoggerWrapper do
     context "generated messages" do
       shared_examples_for 'threshold observer' do  |level, exp_num|
         let(:strio) { StringIO.new }
-        let(:logstr) { LoggerWrapper.new(strio) }
+        let(:logstr) { Lumberjack.new(strio) }
 
-        it "#{level} (#{LoggerWrapper.const_get(level)}) generates correctly (#{exp_num} lines)" do
+        it "#{level} (#{Lumberjack.const_get(level)}) generates correctly (#{exp_num} lines)" do
           logstr.level = level
 
           logstr.unknown("This is an unknown msg")
@@ -95,7 +95,7 @@ describe LoggerWrapper do
       describe 'Log level message generation' do
         GEN_METHODS.each do |level|
           level = (level.gsub(/(::|#)(.*)/, '\2')).upcase
-          n = LoggerWrapper.const_get(level)
+          n = Lumberjack.const_get(level)
           it_behaves_like 'threshold observer',
             level, level.to_s =~ /OFF/ ? 0 : 9 - (n <= 2 ? n : n + 1)
         end
@@ -103,29 +103,29 @@ describe LoggerWrapper do
 
       describe "On/off works as expected" do
         let(:strio) { StringIO.new }
-        let(:logstr) { LoggerWrapper.new(strio) }
+        let(:logstr) { Lumberjack.new(strio) }
 
         it "On resets level to last generating level" do
-          logstr.level = LoggerWrapper::TRACE
-          expect(logstr.level).to eq LoggerWrapper::TRACE
+          logstr.level = Lumberjack::TRACE
+          expect(logstr.level).to eq Lumberjack::TRACE
           logstr.off
           logstr.on
-          expect(logstr.level).to eq LoggerWrapper::TRACE
+          expect(logstr.level).to eq Lumberjack::TRACE
         end
 
         it "On is idempotent" do
-          logstr.level = LoggerWrapper::TRACE
+          logstr.level = Lumberjack::TRACE
           # Ensure the level has been saved
-          expect(logstr.level).to eq LoggerWrapper::TRACE
+          expect(logstr.level).to eq Lumberjack::TRACE
           # "Switch" logging off & back on
           logstr.off
           logstr.on
           # And verify that the level has been restored
-          expect(logstr.level).to eq LoggerWrapper::TRACE
+          expect(logstr.level).to eq Lumberjack::TRACE
           # and back on again
           logstr.on
           # Once more verifying that the level has been restored
-          expect(logstr.level).to eq LoggerWrapper::TRACE
+          expect(logstr.level).to eq Lumberjack::TRACE
         end
       end
     end

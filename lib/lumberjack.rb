@@ -6,11 +6,11 @@ require_relative 'extensions/standard/logger'
 # * A configurable threshold level
 # * The ability to _switch_ logging on & off
 # * Configurable self-logging
-class LoggerWrapper < Logger
-  #require 'logger_wrapper/object'
-  #require 'logger_wrapper/logger'
-  #require 'logger_wrapper/manager'
-  #require 'logger_wrapper/version'
+class Lumberjack < Logger
+  #require 'lumberjack/object'
+  #require 'lumberjack/logger'
+  #require 'lumberjack/manager'
+  #require 'lumberjack/version'
 
   # First off, ensure the manager exists
   #@@logger_manager = Manager.new
