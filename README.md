@@ -1,12 +1,12 @@
 # LoggerWrapper
 
-Class that attempts (from a newbie) to provision extension(s) to the core Ruby ```Logger``` class...
+Class that attempts to provision extension(s) to the core Ruby ```Logger``` class by...
 * Extending the _standard_ constants with...
   * ```ON``` - re-enable logging, restoring the level to the saved level.
   * ```OFF``` - disable logging, saving the current level.
   * ```CALLRET```, ```ENTRY``` & ```EXIT``` - defined for logging calls made at method entry/exit point(s) as appropriate.
   * ```TRACE``` - a level presenting an even more granular logging level.
-* The ability to re-enable logging at the level before it was disabled (using the core ```off()``` method).
+* Adding the ability to re-enable logging at the level before it was disabled (using the core ```off()``` method).
 
 ## Installation
 
@@ -80,4 +80,7 @@ The gem is available as open source under the terms of the [MIT License](https:/
 * Configurable self/internal logging - including the enabling and threshold level setting of internal logging at start-and beyond.
 * Reworking of method names to more Ruby orientated e.g. ```threshold``` => ```set_threshold``` => ```threshold=``` - start by adding method aliases.
 * Using the default logger determined by the class hierarchy of the calling class.
-* Define and introduce logging method caller string substitution keywords - for method, package &/or fully-qualified -  updating the default format to use them.
+* Extend the layout capabilities to all elements (a la log4j/log4perl).
+* Introduce selective shorthand logger method invocation i.e. selectively call logging instance methods without the need for a logger instance identifier prefix e.g. ```debug(...)``` c/w ```$Logger.debug(...)```.
+
+[]: # END OF FILE
