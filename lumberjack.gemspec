@@ -2,13 +2,13 @@
 #require_relative "lib/logger_wrapper/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "logger_wrapper"
+  spec.name          = "lumberjack"
   spec.version       = '0.2.0'
   spec.authors       = ['Dave Pointon FIAP MBCS']
   spec.email         = ['pointo1d at gmail dot com']
 
-  spec.summary       = %q{Wrapper for the core Logger class}
-  spec.description   = %q{A WIP wrapper for Core::Logger}
+  spec.summary       = %q{Lumberjack - more than a Logger}
+  spec.description   = %q{A WIP wrapper extension for the Standard Logger}
   #spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
 
